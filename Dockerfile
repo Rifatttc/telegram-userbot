@@ -2,19 +2,19 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install system dependencies (if any)
+# সিস্টেম ডিপেন্ডেন্সি (যদি প্রয়োজন হয়)
 RUN apt-get update && apt-get install -y \
     gcc \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first for better caching
+# ডিপেন্ডেন্সি প্রথমে কপি করুন (ক্যাশিং সুবিধা)
 COPY requirements.txt .
 
-# Install Python dependencies
+# পাইথন প্যাকেজ ইনস্টল
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application
+# বাকি ফাইল কপি
 COPY . .
 
-# Command to run the bot
+# বট চালানোর কমান্ড
 CMD ["python", "main.py"]
