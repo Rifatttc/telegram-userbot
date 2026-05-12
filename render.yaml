@@ -1,8 +1,9 @@
 services:
   - type: web
     name: telegram-userbot
-    env: docker
-    dockerfilePath: ./Dockerfile
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
     envVars:
       - key: API_ID
         sync: false
@@ -12,8 +13,3 @@ services:
         sync: false
       - key: STRING_SESSION
         sync: false
-      - key: DATABASE_PATH
-        value: /data/userbot.db
-    disk:
-      name: data
-      mountPath: /data
